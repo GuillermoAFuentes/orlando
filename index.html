@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es" class="nojs"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1a1035">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Orlando 2026">
+<title>Viaje a Orlando · 5–13 septiembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&amp;family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --twilight:#1a1035;--twilight-2:#2a1450;
+    --magenta:#ff2e97;--orange:#ff8a3d;--gold:#ffd166;--teal:#2ee6d6;
+    --cream:#fff6ee;--ink:#12081f;
+    --panel:rgba(26,16,53,.62);--panel-solid:#241443;--line:rgba(255,255,255,.14);
+    --disney:#7c5cff;--universal:#ff8a3d;--miami:#2ee6d6;--otro:#9aa3b2;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    color:var(--cream);min-height:100vh;background:#0f0725;
+    padding:0 0 200px;-webkit-font-smoothing:antialiased;
+    -webkit-text-size-adjust:100%;overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(1200px 600px at 78% -8%, rgba(255,209,102,.28), transparent 60%),
+      radial-gradient(900px 500px at 15% 0%, rgba(255,46,151,.30), transparent 55%),
+      linear-gradient(180deg,#0f0725 0%, #23124f 32%, #5a1b6e 58%, #b23a6b 78%, #ff8a3d 100%);
+  }
+  .scenery{position:fixed;left:0;right:0;bottom:0;width:100%;height:auto;z-index:0;pointer-events:none;opacity:.95}
+  .sky-deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .star{position:absolute;background:var(--cream);border-radius:50%;opacity:0;animation:tw 4s ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:.15;transform:scale(.8)}50%{opacity:.9;transform:scale(1)}}
+  .neon path,.neon line,.neon polyline,.neon circle,.neon rect,.neon polygon{filter:drop-shadow(0 0 6px currentColor)}
+  @media (prefers-reduced-motion:reduce){.star{animation:none;opacity:.5}}
+
+  .wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:22px 16px 0}
+  header.hero{text-align:center;padding:26px 18px 20px;margin-top:8px}
+  .eyebrow{font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;color:var(--teal);margin:0 0 10px}
+  h1.title{
+    font-family:"Bungee",cursive;font-weight:400;font-size:clamp(2.1rem,7vw,4.2rem);line-height:.98;margin:0;
+    background:linear-gradient(92deg,var(--gold),var(--magenta) 55%,var(--teal));
+    -webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 34px rgba(255,46,151,.25);
+  }
+  .daterange{
+    margin:16px auto 0;display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;
+    font-weight:700;font-size:1rem;background:var(--panel);border:1px solid var(--line);border-radius:999px;
+    padding:9px 18px;backdrop-filter:blur(8px)
+  }
+  .daterange b{color:var(--gold)} .count{color:var(--teal)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 6px}
+  .btn{
+    font-family:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border:1px solid var(--line);border-radius:12px;
+    padding:9px 14px;background:var(--panel);color:var(--cream);backdrop-filter:blur(8px);
+    transition:transform .08s ease, background .15s ease, border-color .15s ease
+  }
+  .btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:linear-gradient(92deg,var(--magenta),var(--orange));border-color:transparent;color:#180a12}
+  .btn.save{background:linear-gradient(92deg,var(--teal),var(--gold));border-color:transparent;color:#0d241f}
+  .btn.ghost{background:transparent}
+  .btn:focus-visible,.icon-btn:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+  .hint{
+    max-width:820px;margin:12px auto 0;background:rgba(46,230,214,.12);border:1px solid rgba(46,230,214,.4);
+    border-left:4px solid var(--teal);border-radius:12px;padding:10px 14px;font-size:.86rem;font-weight:600;line-height:1.4
+  }
+  .hint b{color:var(--gold)}
+  .storage-warn{display:none;margin:12px auto 0;max-width:820px;background:rgba(255,60,90,.18);
+    border:1px solid rgba(255,60,90,.5);border-radius:12px;padding:10px 14px;font-weight:700;font-size:.86rem}
+
+  .days{display:grid;gap:16px;margin-top:20px;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr))}
+  .day{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 15px 15px;backdrop-filter:blur(10px);display:flex;flex-direction:column;min-height:180px}
+  .day-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:4px}
+  .day-idx{font-family:"Bungee",cursive;font-size:.8rem;color:var(--magenta);letter-spacing:.04em}
+  .day-date{font-weight:800;font-size:1.12rem;text-transform:capitalize}
+  .day-sub{font-weight:600;opacity:.75;font-size:.82rem;text-transform:capitalize;margin:-2px 0 8px}
+  .acts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;flex:1}
+  .empty{opacity:.55;font-size:.9rem;font-style:italic;padding:10px 2px}
+  .act{position:relative;border:1px solid var(--line);border-left:4px solid var(--otro);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.05)}
+  .act.park-disney{border-left-color:var(--disney)}
+  .act.park-universal{border-left-color:var(--universal)}
+  .act.park-miami{border-left-color:var(--miami)}
+  .act-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .act-time{font-weight:800;font-size:.82rem;color:var(--gold);min-width:44px}
+  .act-title{font-weight:800;font-size:1rem;flex:1;min-width:120px;overflow-wrap:anywhere}
+  .act-place{font-size:.76rem;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.12)}
+  .act-notes{opacity:.82;font-size:.86rem;margin-top:5px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+  .act-actions{display:flex;gap:6px;margin-top:8px}
+  .icon-btn{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--cream);border-radius:8px;font-size:.78rem;font-weight:700;padding:4px 9px;font-family:inherit}
+  .icon-btn:hover{background:rgba(255,255,255,.15)}
+  .icon-btn.del:hover{background:rgba(255,60,90,.35);border-color:rgba(255,60,90,.6)}
+  .add-day{margin-top:12px;align-self:flex-start;border:1px dashed rgba(255,255,255,.35);background:transparent;color:var(--cream);border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer;font-family:inherit}
+  .add-day:hover{border-color:var(--teal);color:var(--teal)}
+
+  footer.foot{position:relative;z-index:2;text-align:center;margin:34px auto 0;max-width:1180px;padding:0 16px;font-size:.82rem;opacity:.72}
+
+  .overlay{position:fixed;inset:0;background:rgba(8,4,18,.66);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:30;padding:16px;overflow-y:auto}
+  .overlay.open{display:flex}
+  .modal{width:100%;max-width:460px;background:var(--panel-solid);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 30px 80px rgba(0,0,0,.5);max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-y:auto}
+  .modal h2{margin:0 0 14px;font-family:"Bungee",cursive;font-weight:400;font-size:1.15rem;color:var(--gold)}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-weight:800;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;opacity:.85;margin-bottom:5px}
+  .field input,.field select,.field textarea{width:100%;font-family:inherit;font-size:16px;color:var(--cream);background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;padding:10px 11px}
+  .field textarea{resize:vertical;min-height:60px}
+  .field option,.field optgroup{color:#12081f;background:#e9e3f5}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+  @media (max-width:520px){
+    .row2{grid-template-columns:1fr}
+    .wrap{padding:14px 12px 0}
+    header.hero{padding:20px 6px 16px}
+    h1.title{font-size:clamp(2rem,11vw,3rem)}
+    .btn{padding:11px 14px;min-height:44px}
+    .icon-btn{padding:8px 14px;font-size:.85rem;min-height:38px}
+    .add-day{padding:11px 14px;min-height:44px;width:100%;text-align:center}
+    .day{padding:15px 13px 14px}
+    .act-actions{gap:8px}
+    .modal{padding:18px 16px}
+  }
+
+  @media print{
+    body{background:#fff;color:#111;padding:0}
+    .scenery,.sky-deco,.toolbar,.add-day,.act-actions,.storage-warn,.hint,footer.foot{display:none !important}
+    .wrap{max-width:100%}
+    h1.title{color:#111;-webkit-text-fill-color:#111;background:none;text-shadow:none}
+    .day,.daterange{background:#fff;border:1px solid #ccc;backdrop-filter:none}
+    .act{background:#fff;border-color:#ccc}
+    .eyebrow,.day-idx{color:#a01560}.act-time{color:#b45309}
+    .days{grid-template-columns:repeat(2,1fr)}
+    *{color:#111 !important;text-shadow:none !important}
+  }
+  /* Contraseña / cifrado */
+  .setup-banner{display:none}
+  body[data-mode="setup"] .setup-banner{display:block;max-width:820px;margin:12px auto 0;background:rgba(255,60,90,.16);border:1px solid rgba(255,60,90,.55);border-left:4px solid var(--magenta);border-radius:12px;padding:11px 14px;font-size:.9rem;font-weight:700;line-height:1.45}
+  body[data-mode="lockscreen"] .toolbar,body[data-mode="lockscreen"] .hint,body[data-mode="lockscreen"] .readonly-note,body[data-mode="lockscreen"] #storageWarn,body[data-mode="lockscreen"] .days{display:none !important}
+  .pw-hint{opacity:.85;font-size:.84rem;font-weight:600;margin:0 0 12px;line-height:1.45}
+  .pw-msg{min-height:1.15em;margin:2px 0 10px;font-size:.85rem;font-weight:700}
+  .pw-msg.err{color:#ff9db1}
+  /* Modo solo lectura cuando NO se ejecuta JavaScript (p.ej. vista previa de iPhone/Files) */
+  .readonly-note{display:none}
+  html.nojs .toolbar, html.nojs .hint, html.nojs #storageWarn, html.nojs .act-actions, html.nojs .add-day{display:none !important}
+  html.nojs .readonly-note{display:block;max-width:820px;margin:12px auto 0;background:rgba(255,209,102,.14);border:1px solid rgba(255,209,102,.5);border-left:4px solid var(--gold);border-radius:12px;padding:11px 14px;font-size:.9rem;font-weight:700;line-height:1.45}
+  html.nojs .readonly-note b{color:var(--teal)}
+</style>
+<script>document.documentElement.className="js";</script>
+</head>
+<body>
+
+<div class="sky-deco" id="skyDeco" aria-hidden="true"></div>
+
+<svg class="scenery neon" viewBox="0 0 1440 380" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <circle cx="1180" cy="90" r="46" fill="#ffd166" opacity=".55"></circle>
+  <g stroke="#2ee6d6" stroke-width="4" fill="none" opacity=".8">
+    <path d="M70 380 C 66 300, 60 250, 58 210"></path><path d="M58 208 C 20 190, 4 200, -6 216"></path>
+    <path d="M58 208 C 30 176, 14 168, -4 168"></path><path d="M58 208 C 40 176, 62 154, 92 150"></path>
+    <path d="M58 208 C 78 182, 108 174, 132 184"></path><path d="M58 208 C 74 196, 104 196, 126 214"></path>
+  </g>
+  <g stroke="#ff2e97" stroke-width="3.5" fill="none" opacity=".85" transform="translate(250,150)">
+    <circle cx="0" cy="0" r="82"></circle><circle cx="0" cy="0" r="10"></circle>
+    <g stroke-width="2.5">
+      <line x1="0" y1="0" x2="0" y2="-82"></line><line x1="0" y1="0" x2="0" y2="82"></line>
+      <line x1="0" y1="0" x2="-82" y2="0"></line><line x1="0" y1="0" x2="82" y2="0"></line>
+      <line x1="0" y1="0" x2="58" y2="-58"></line><line x1="0" y1="0" x2="-58" y2="-58"></line>
+      <line x1="0" y1="0" x2="58" y2="58"></line><line x1="0" y1="0" x2="-58" y2="58"></line>
+    </g>
+    <g fill="#ff2e97" stroke="none">
+      <circle cx="0" cy="-82" r="7"></circle><circle cx="0" cy="82" r="7"></circle><circle cx="-82" cy="0" r="7"></circle><circle cx="82" cy="0" r="7"></circle>
+      <circle cx="58" cy="-58" r="7"></circle><circle cx="-58" cy="-58" r="7"></circle><circle cx="58" cy="58" r="7"></circle><circle cx="-58" cy="58" r="7"></circle>
+    </g>
+    <line x1="-40" y1="150" x2="0" y2="0" stroke-width="3"></line><line x1="40" y1="150" x2="0" y2="0" stroke-width="3"></line>
+  </g>
+  <g stroke="#ffd166" stroke-width="3.5" fill="none" opacity=".9" transform="translate(640,110)">
+    <rect x="0" y="120" width="220" height="140"></rect>
+    <rect x="30" y="60" width="34" height="200"></rect><polygon points="30,60 47,18 64,60"></polygon>
+    <rect x="156" y="60" width="34" height="200"></rect><polygon points="156,60 173,18 190,60"></polygon>
+    <rect x="86" y="30" width="48" height="230"></rect><polygon points="86,30 110,-24 134,30"></polygon>
+    <rect x="96" y="150" width="28" height="110"></rect>
+    <line x1="110" y1="-24" x2="110" y2="-44"></line><polygon points="110,-44 138,-38 110,-30" fill="#ffd166" stroke="none"></polygon>
+  </g>
+  <g stroke="#ff8a3d" stroke-width="4" fill="none" opacity=".85" transform="translate(980,60)">
+    <path d="M0 300 L60 120 Q90 60 130 120 L150 150 Q170 178 150 206 Q126 236 108 206 Q96 184 118 168 L170 120 Q210 84 250 150 L320 300"></path>
+    <line x1="90" y1="150" x2="90" y2="300"></line><line x1="200" y1="150" x2="200" y2="300"></line><line x1="260" y1="200" x2="260" y2="300"></line>
+  </g>
+  <g stroke="#2ee6d6" stroke-width="4" fill="none" opacity=".8" transform="translate(1370,0)">
+    <path d="M0 380 C 4 300, 10 250, 12 210"></path><path d="M12 208 C 50 190, 66 200, 76 216"></path>
+    <path d="M12 208 C 40 176, 56 168, 74 168"></path><path d="M12 208 C 30 176, 8 154, -22 150"></path><path d="M12 208 C -8 182, -38 174, -62 184"></path>
+  </g>
+  <g stroke="#2ee6d6" stroke-width="3" fill="none" opacity=".5">
+    <path d="M0 340 Q 40 326 80 340 T 160 340 T 240 340 T 320 340 T 400 340"></path>
+    <path d="M0 356 Q 40 342 80 356 T 160 356 T 240 356 T 320 356 T 400 356"></path>
+  </g>
+  <g stroke="#2ee6d6" stroke-width="3" fill="none" opacity=".5" transform="translate(1040,0)">
+    <path d="M0 340 Q 40 326 80 340 T 160 340 T 240 340 T 320 340 T 400 340"></path>
+    <path d="M0 356 Q 40 342 80 356 T 160 356 T 240 356 T 320 356 T 400 356"></path>
+  </g>
+</svg>
+
+<!-- Plan guardado dentro del archivo. Se actualiza al pulsar "Descargar archivo (.html)". -->
+<script id="tripData" type="application/json">
+{"enc":true,"kdf":"PBKDF2","hash":"SHA-256","iter":200000,"salt":"ryYzxQQH2Ny7cyE/OyOmeg==","iv":"Wkln3npC37khLPcU","ct":"Ve1OH0Qd8e2VrpyJr54vIiiRlerqxVmyXirChyPDrbjKBWX/oSiKgOTGizFd65cuySlxOmo1EyiSoVE/mfBcRmCAg+t5NWZib27QWWdsupahpidvHCR365pXyy0YYx1ERhIlpwhzmv9UxAM7nDTI6+fn066EtP+v0OnXNBE4Ga9Nt+3wXBYq29rDhnwN2j3d9Xm3RnOJgyFPRUi27rgZWxaDFjZupgTft2sTTbGxIejaBcoeZLWZhE9keqjXbEpbllm0/fGeK/eg9Aoy0yp1QsB3r+vB5abcZ+0vIDHlIfNRL4sOch1cs1hD48BmkZcswrpMdq22UIyEDV7vFNFHs6hDP40Ym+I60/VTY8BhJhNvxnLUSAZcFD1gge5EGc/DxuFMIcYVW8EuEj8P/1q6/5ShgQXPvPgzKtxNSyui1Onjdxu7mnn7Gh+EPC9x/YNpMocCXppLUOEVheZLl5+HzEYHK86AVpsS0jQpfPK4HqHkmzGXBNxKHmzcwqzdtylbGTb9YFidZcayXbOIhrqw3+MNtFJ/zioEmIaOCc/0YlSIrEI8eTSgh9dEu0XuD409t5XrYdyddz4SgDNRFigEE58tXcDQs7JKA2rkDNmfiFdLbOfDXkDx/VGbwb3oFwlydbOnOvm3ravjP1n0tUsXTH9vUGhtaRmWJhpUDGXiktwPud+TH6dWCJuykuT6IWnWDQlBiLpidIghELYYg80mwMKqiQcenEIjwCm48EAmYngGbbQto2R0DoretJmbUrbiJIOe1sCN01Hr3HLBNST7aqQLiC9C+9ZZRRH9b/DIkFbSQ9lTOFo0ST+yg3ISb4WkVjH42+u9HISz/bF/dGUNLjGz0PcbuUTvGB0hckEBz9KRzuJoGB8EbzvFXlMdhyfN1UWNOnCpwZMwZUxMzo56fmNJImP2438qMQrJ9Iu3eO6JgfK+ikI02/LraeHlYC27EGT5z6thuW5QVeTEOSkurKG2baDcxyooV64yewJrPWJEwQHJ192AIko3pSf6RHzFPmUZp4+CVclXj9XSaWujzzmksNGOAo/7EUh8fsn8bWu6odLRLSR1OCxu90nVRxqiB37TFw/GA/fd2tAGbWAl+/kfpNtaHyaBLmyJ+LtT7vQmd8Anxdo7XsNiEObXVAWsd8i6CpzL9KM5thYEdPJrlcM16t2FoxZxlGc9hs95mVVPkOY3v5ajeyamDpC4xyt4vzbgakC7xPCV9SBBrW6/DtNhcl1QwBzvy7B/lGsgRvYjiXu+TZ5A7DSA4bL2iQgE8PGKUkpa4Ddg0YqJdZcAG02tKbhcMWMsOkJ4iMe9y9rhQpSi+61mav5nrITyp2TFcTWS1GXB/3+n/P4y2QpJqSmOAoBgOabrArejjnTvdBWMMWNkmuvYeHXNsDNBiPxkMYt4UBKq2Am/imUCIxNokyh4GFdjKUhldYmgdwkB9Fn5tUoe6GtODUwB+O6KEfPVd2obF5PTjEh4DjBFkcKBKAym3jNFgEmeL9/KKJPL7LBB9uyrAAukZwf3NYgcB407Nrtkg5J6/L1x/VZzll6DKBPcQBzG2Ap2S6mozMJ1jHRDTiC2EUQeuFFWuHumzqYdLuwt51jE/bzuG85n5gMoblwkIn/RV/iGg8mCbPVs5sQg+DP9+fbdEFyMPJqYy/qYIkK5nOGCqJ+mMIA1jA09A2nrp8BTmO/H6/LNlXAyNB23MMMHUXzCArx0ejoatnEEqm6DsUtXjgj1ttXswZArxwezWKPL/DzWS21Ff3vQ9F76csLfjGeRhu7pAJBhxCfrjs/x0jGe4h73JxuvOXSRHF/dnjDDZWbvxwz9U9Ezo9P///QEFEksZRytD0fxNIs3EpW+qDvJOxJufL7sr6gesJQEusDzMaWd8Mk0uy/qRu885QA2TlHRA5FnFrKnMQCf1PRD5Zusq1P1+kiDQGjlhCCFt4BymSq+gVenuDgxI948PkCaH7vmD3FBAqRs5+GPW1v+Y30cNs1C0Is3E4VNmMsdMe94u2ck/VnjQOf2EX/3hXBKEOgI9R2F9C4yGaYZmNKMc8vu9aC4v4yY+2wmaEVgi0EMw/Zz7e1i+do1pLxiJMVRXeJ800SR7cqdd2Ia3dNXj8us4Kjx07VAo3EOA+cmZKbZdzE/gsVfss2p2mtJxgFWqK6PGlyo3mqqC+05d6Vr1CZ7l3tIIOUqxrxLSDTT7VrtpLQMYLe5p2X8fJFOqAV0XyW+jTGMI3IlvqZgWrbbMbLQ67Cb2D02HXkrJT+kI0oO2+uaW3GoQJuLJ7Y/C5dOOLkBTPhiyXn44wy6OnxnfY8SHfw0UTc68PA7YTTfA0gn7Oyg0R3NqRD/1YNdk3SBx2yomYzExClPEm6DqzlgOyY3HJ6LqL0vkewalHC8ny7K45GNEir3YN9IP66booMG6ialXRDJGDTCl5sWQEwhbrDwAquxQLlDeCnm0kCRXJhlp4fT54FZb87YArB9ASkz43IWoR+2vsF7x9CcakZVnDVywQUGdtHk1nvarl7OBc1CxAhikNHlQmPBY5yDWTjca8oWvaOBH6py6a151+gKNBxg9JWc+pNKFb+zwjuN4kY2qFuGM+22xOkC4isheSOWwC0K8V/0hGxt0/NthyG9cPSJyM96SKzqV/MH7/cFt1FgtvJiorWGbqDzReJSKVgLKRklJjm0Wxqk12QV1wHbl66wPg2riHaJWGgDEYgfZCIUyNPXcQpoXJJuKiB52Io6vCce1Vn8KHLiza8yDomkCmgOtCY7MU+scLcdqrJQEH3MQP/RzZ/zEuj5d9PKVAdqPDEXeKwpFT+GnmK9BLyT3FYI1kq7KUD/5+8GZ1tq9y4Z23aSfsRDoEXh3mDipUSDNOgnL8959slB3kwdlnunnh9J7xsFsZq8Zm3J1xoZPRQvIrx/lu887FdC4M30fzmczsTb/tBfvfMl+R9FsqV6TybPRD7BJPoTwLSQSt3uRmNs4nqIom7g4NRwZCgBXGOmbwIkAC+xcS41sdKT1ujylt30DNuIVbQz6weHnIVhV4JuSj6gKXOzrB++FooEV7Rd4pwsT1o43OQKHOJZxngLDF4QsFT2tg2K/YPHl/TBNnHFHhlbTCIpwQZpdm6IG8Jc1PmyzvW1Vq9IqDeu2klB25DrHdMBD8fgslnBEzLonjlpwxn8fwaxvVby4ja8x64QModUgMBCbWzxUDAg6KFNYHbyQl+6f2LI1EoD5JOMG3zlHlhSatbd/ES9WijPWzDQ2iZgRkOOH64cLGsK+Nt3bPT4+5Ir7BU/U0TP9EV2ZD7MpK54XXZQPS4Kh2NQeHMDB7GXJ4P+ZizlTIcA1Gy/qJHLw44KAsprUTYypr/g+9Wku3VBnVAt9G98ENDfSQjVHuPqgXAahKvKoIQAXc0DhsEZamGZY/FByRKzBhSRJr4VIKYl58AeMqjDxXCEzIqSSdbLi6zIjQwc5XYyNIL0FkGW5G8yJLKB9KIhWNpk6PK9/GhOqh2qLIA9vjxF3Rz/COLi5lp9mKgs7Lfro3nWiwSJ1e6ThoLsBzPuu+bZ8/NSE7aDSWmmK8x0FBaL/p1xHnsHCloEVfEZsIefT8db/9vndBDA1rHovQ2P7MJRfCL4ZhSa8eANBI1xb+77y/zd+WQ7zbJ110pYQ3qXW1R2vx1GvJtTxwedeY5rdUDj3Mtu5sNyW3dGbt6ghxtxnWAfY0xqowJxNBal59Foak1V52wKTBnLrCRLmTJuJ3Kk5c7kC6bIw+SZuopBQSuO2Iow7ER1S514u/eupYd5rMA3EraN5bKdY0G2SO6dWwW0hzRDVx8CTHc3RJl7BIJnx7mX02HgoNoGKuTwejrMcNCP9xZbPiTrqR7ZbMXg7uy82v0P/o69+4UBqNkDj0K6DKJnR0gqWgrAik2dp0RKrC8XkFLuz1HPU2dkNTZ5T+jpHupV9ApxXpHg2rekvTTAsyNt56qqvsNUoZY6rzJ7R5bWuV0FNaS5qkKo43z4hSPuzPo9wEdNgF9tHWLFPnYDfoXDsNPUQwc8arHG492DahDb/+jE8aRFRkqyu/u2TXE+IJIp4Gpv6XZ9REqoY39xvxOA4GHZvrNhP7fh9PlayJRJYyR6M7mn8R/ICOocQ2tTgThog3bCYVxTFcSMlFWzJVWAnxCLeDi55EvDaloeVBuD1AQIVTO7Lj55tjDqolzDbQjK5LFNrYpw5AxrBplHHVD2qFth1HyNouPzi/kn2HbD0jzV2NfeZHx6/RsRZc7Zu5XOrqQY/uIEPTd548cAa1Afmm20M9a2oRINbTMeqLAxCUzXueUZZs6G5D+H5GKMBvvkXbmpb24uH2Zn0sFVcGxPneZJfbvNnPGmJFR1Cg8iMdsih2+NZXC22DCXVg4JKV3xcF0OaLSU6LSKCgVeZk9spaXvJDdo7/SoUZgPzTQDAJs9Z8P60dR+b8o+BGbaO37BdjFVm1ESr8peUyxIOkmaZ53YnnrDmGH1KfVGN/XZ6twyAqsm1iz3Xq8d6FJ9y7IeQfy0L6uuBlg792T8YWBbrG9+nVjiECem31VMmMf8RnSGggc6sTLLMjyW00bqLA/91aIjcWOMUg4aTx5Uoe6DSKdtiT6ntBXOd/2ODH0j+GIpnO4APRM2ezO2XVbVt40+kaOEec3ociOZxA+FjS9Ul5dWCBmqas7x/XQJxlKGuJ1SG0tRuQXIQrt1cUIv2ynQ9zYW7yDY6qwSv2J3igqipBinEb9S+YsYO5ty1ENJDHPvv2rPxBSBunYJLJQhWpZZJ8Ji3Q52obwSuw8mGGSztGmbLz9HIoPmLifupP0rixgRYU7lHr558EG1mzCyXzjKShZwECNAu7YfGtJefsPzdGevdOt7wMYyOL+xw7YhYsVDLTKsnuvcmghgIuvZiQJtukLp9ryLtKk/HgfGJ5MxCSJkVUsRgOiyOO4oBN6YASCNFYv3gjODum875HpzrmS/6wi1ytSZf9cyBoQgGxo7+piKQOQ8nEV/R0N2d7+trgiiwkxOtaynFL5vrgSrlm9yyeGkMmyo3L91me1sfTGLJKHrOIeJ4XCyNNBNa4vmTLNjtRBF0bFy3+kwJGl/jTHp5+cx8P5ZPPt/yFOcptlTIPAe0sZGFomqDS+uGZbwWXdCyh0+vvmuDPCZh28wQmvcWeZ21xhjtlJDyrKYV7EJFWgJfqA734l/rxCAUaf+NPnkSSRlBBU5sH/Nn+xT/ETo9D7HoFr/31yae8ZbibTG95UxmWKSWGv8KBKmAapYYQ9z6xTLrd6s1fhUXPuRebkuCuJGzWr4uLcQA0jiJN6O8FrMcuRmp3f8yNMnxBVOSEdgm+pdKeQLuajQgIPVryhA8WsVxx2lZTuAaYHLgDsU+e/lnGm0Gd7wkahGEUKXDvwAmMT3vOjQXc64uPL6GnI4enfpAE3Gp/M05s1INPObzhLxb6Uf4JHgbR+d2ISHudASfQf3CUX3O+HibM7jcEihnaeoB3G+LuYY6uloY89+J1mNIoJoszRT+ArVFfnbgkdHt883X+8C/cwL3uCI0tq5+hd46sW53KJDTENjM+2/XbUVlGYcJNtl3nxx1PGpmhkZhVBspoNCxm+HfZjobHyu84IuHX5VYHp9Ic1hoCv9T2CJ1pQ9xXQ1cQk9r7e3hfcyKrCg+wa/3cDlbekPCgicLi0et4LP0u15qV37vagTMQMXELJLezuE57lfh5isaQb+s1RHJHIfLdy5/A3FZdLTb2TsiCDSoa9xxHLFcGQFItNYM/SIT45MnbeV7SUoco5rfI2BIR0wRLd6hLtPZCUKcNWnATWyQYO7wqrJds4XdJSTZQ2nxlbvviXvvJYlgSfYNJrJFsk8IwYbDPAmDvv0LnvKCcS0Slry/0m3MqC1I44zqmxIszuzLe+ju4jysl8bW8npqUodStiYlZNubGFVYgYx7tW7elHvl0yieaQszyr1C/cbCnCLVLcU0ixxpaxa/vkcfg8+ANQyxlLXoZnkIF7fIU0qT1AG9727WjDZoRkwKnztOaIM2zZZVaQH/XuisUTSTG7oPPDOjWA1aCSrsdhag08OJ+RglxTHDGPRGD0mAeux3chNAYa7AJ3s64u2S6rkMTu/o9n5vrFiEVE/EltDLmllpuceA4fuGXbGBlsGg38K/VaOsXsZUzI6aFEwB+4JtMaOOydZTYu10FcFcICuBm9UJ9EfX/a7L0MIyJIHK+ZllGexvWTxJBVLC0fKr3uGtPgRcDvJ5+yMT+pl8b32KKSLSlcGAoy5zkvgDozut+aBiIuE4529QpQx68bsw2tKTyxAMQU7n+dGImIxec29ov5kz15hPWa/RCW2RPAwuo98kEtUDKq7nT6zKxC8m8z99IOS7JESTl5F8QmCl1A19kktAFjb0Lntu1a83Ti45RYhTQMPNzu9gG75nVGjWaeUQz++AIiOd5CG/LXlvOnNHioG9hMb6vuC70SNkwALRko/+tnfW+6mhq60wam8eXW9YPUWxpf6N2R68ObLQ6guFTKJodfLv7XrYJdxtsY8Db74lFmVjdTd9pj7MJhGcnyQqWM+agtBNgkG8+T8vILl+KPOt+L9KuVghuHSMBdEetErJvcEg49lfCIQ6chboYQ48JEsr1w5sa98k4s8QRzNQFM6X++g0MCFgIjOSNYz1Zu23+dpfOkooFKCQjkGiEeZQAVgfHduf/Yk0ljgLPGxbxMOIcYBxWwmttTDfxQbtVXWHCkSaNvkCK03V1CRXTdG5vqJ8678AcQZbbwrKwC2YBPX94wvau6wHUjdpNvnzERwru3ebu8LgPpz3RmAp2+zekL7CFH6iYNOjE76LjSGMlz1wW2fp/IH6LOK0cvBnpBxl7D6JDeQh+Pzhrv/nXBkNKuSkK7EJ+3Rh4SoX+CBf5CpdjAH4vV2bAzw6YekbPYpAUmp6QMIU0+6s2OkvM03uIr7VR04Iu6dsY8cSte4DdEOqpn2KjI/sYHcw9HowIiPc45AFpv7hzSv8GvmAsXyeNnvErk4cQmotfyhKKR+fx4Tld63XWDRa5ZGdc+Hgf3XBUkqaggLxFJY96nJa2DqYcSPCVDA7WkcU5Phoqjq+s2IQP+QleMl5+sQ2/TSyWq+SR4RuX/RlgyRWWPrtwY87qSXAlmteNOiujQcpp9/AyUoFA5AwDR4Hh2UaMBOlb9Bt9kh1ake/XxTN1T3XMJQcc6EzFgm66JmBtGPQ85ULQGnjm6VEqRULF847BLnH0bTjBmSZQWv3pVLsyNT68LvPQd5kjKc+oS55iyXcdl++elYB7RbH8E6XGdp5OeAopcGVeEVnTlKhslvaZEK/UAgy+SbUVTwjwFDGLasQcFc1ovTZaHL1jxA6dwzyDdilWNsZABsVvANOMs0PMiQA1vMeoyDT8EmTyKszT6+PSkKO9oN+0dqNqIcu98/QT3AmBYwOPV9xPc9UwAMEqxlRJUEkYk8LF5zV2F14UTN7BLPUg8PGyT0RylQyR9nd9SrMuWz0nbDEo85GIa8+HpC67vWVLEnUAEgG2guqVQxK40AHo13mSDrVXllGB5e9dq4h5AMqB8riWtr85hP2+WfyC/5ZbySeoxBJ1f5CpTeXgavpq2OcQAjr9TyOpBLCkG7b/odF813ZPWh5JVDRiNCYQuJCAttzXQh/gw5/KmzGZpn8NcyRYMczGeUo+P8al0JojBBsc2FgPeyUOXncF1MNW6pxKsug0wgoH+lz9bt/LvBx3S3eElNcBkevi/lToQPfP8lz4Q/8nMoUsA9If6tyKmxhfV0wDsLixFiHbARxlVo7R/nwDUHnaajJflHVydSYnPhyU0umCqeZ0tGhrbnPwOov31nBF1SJg+VSY733zynEX2+7iicEplgoZhggVPm4oSq4o1o90Izpfc9rOaXG/yzG/DlhlMFLsvh0nSV3QjSO0lR/WThlP8SE1spiNpLuKPw1DrvD3PJlaRIg5f5XWRI8/+g6c/YB/T9N2I4EAyFBo+SheJ/RHaITZv6SR9nhuFCkK54","ver":"v1786900651018"}
+</script>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Bitácora de viaje</p>
+    <h1 class="title">Orlando 2026</h1>
+    <div class="daterange">
+      <span>🛬 <b>5 sep</b> · llegada</span><span aria-hidden="true">→</span>
+      <span><b>13 sep</b> · regreso</span><span class="count" id="counter">· 36 actividades</span>
+    </div>
+    <div class="readonly-note">
+      👁️ Vista de <b>solo lectura</b> (iPhone). Para <b>agregar o editar</b> hay que abrir el plan como página web en un navegador; abajo puedes ver el itinerario completo.
+    </div>
+    <div class="setup-banner">
+      ⚠️ Este archivo <b>NO está protegido</b> (cualquiera podría leerlo). No lo subas así a GitHub. Pulsa <b>🔒 Descargar cifrado</b>, escribe la contraseña familiar y publica el <b>index.html</b> que se descarga.
+    </div>
+    <div class="toolbar">
+      <button class="btn primary" id="btnAdd">+ Agregar actividad</button>
+      <button class="btn save" id="btnDownload">🔒 Descargar cifrado (publicar)</button>
+      <button class="btn ghost" id="btnExport">Exportar JSON</button>
+      <button class="btn ghost" id="btnImport">Importar JSON</button>
+      <button class="btn ghost" id="btnPrint">Imprimir / PDF</button>
+      <button class="btn ghost" id="btnReset">Borrar todo</button>
+      <input type="file" id="fileInput" accept="application/json,.json" hidden="">
+    </div>
+    <div class="hint">
+      Este es tu <b>editor</b>. Cuando termines, pulsa <b>🔒 Descargar cifrado</b> para generar el archivo protegido (<b>index.html</b>) que subes a GitHub. Tus primas lo abrirán desde el enlace con la contraseña familiar.
+    </div>
+    <div class="storage-warn" id="storageWarn" style="display: none;">
+      Este entorno no permite guardado automático permanente. Tus cambios viven solo en esta pestaña:
+      usa <b>🔒 Descargar cifrado</b> para conservarlos. Al abrir el plan desde tu enlace de GitHub el guardado sí funciona.
+    </div>
+  </header>
+
+  <main class="days" id="daysContainer"></main>
+</div>
+
+<footer class="foot">
+  Autoguardado en este navegador. El plan también queda incrustado en el archivo al descargarlo.
+  Fondo con formas genéricas de parques y playa (sin personajes ni logotipos de marca).
+</footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <h2 id="modalTitle">Agregar actividad</h2>
+    <div class="field"><label for="fDay">Día</label><select id="fDay"></select></div>
+    <div class="row2">
+      <div class="field"><label for="fTime">Hora</label><input type="time" id="fTime"></div>
+      <div class="field">
+        <label for="fPlace">Parque / lugar</label>
+        <select id="fPlace">
+          <optgroup label="Disney World">
+            <option>Magic Kingdom</option><option>EPCOT</option><option>Hollywood Studios</option>
+            <option>Animal Kingdom</option><option>Disney Springs</option><option>Typhoon Lagoon</option><option>Blizzard Beach</option>
+          </optgroup>
+          <optgroup label="Universal">
+            <option>Universal Studios Florida</option><option>Islands of Adventure</option><option>Epic Universe</option><option>Volcano Bay</option><option>CityWalk</option>
+          </optgroup>
+          <optgroup label="Otros">
+            <option>Miami</option><option>Traslado / Viaje</option><option>Hotel / Descanso</option>
+            <option>Restaurante / Comida</option><option>Compras</option><option value="">Sin especificar</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label for="fTitle">Actividad</label><input type="text" id="fTitle" placeholder="Ej: Fila para Space Mountain" maxlength="160"></div>
+    <div class="field"><label for="fNotes">Notas (opcional)</label><textarea id="fNotes" placeholder="Reservas, precios, recordatorios…" maxlength="800"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn ghost" id="btnCancel">Cancelar</button>
+      <button class="btn primary" id="btnSave">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="lockOverlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <h2>🔒 Plan protegido</h2>
+    <div class="pw-hint">Escribe la contraseña familiar para ver el plan de Orlando.</div>
+    <div class="field"><label for="lockPw">Contraseña</label><input type="password" id="lockPw" autocomplete="current-password"></div>
+    <div class="pw-msg" id="lockMsg"></div>
+    <div class="modal-actions"><button class="btn primary" id="lockBtn">Entrar</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="pwOverlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <h2>🔒 Poner contraseña</h2>
+    <div class="pw-hint">Elige una contraseña familiar. Todos la necesitarán para abrir el plan. Compártela por un canal distinto al del enlace. Si se olvida, el contenido no se puede recuperar.</div>
+    <div class="field"><label for="pw1">Contraseña</label><input type="password" id="pw1" autocomplete="new-password"></div>
+    <div class="field"><label for="pw2">Repetir contraseña</label><input type="password" id="pw2" autocomplete="new-password"></div>
+    <div class="pw-msg" id="pwMsg"></div>
+    <div class="modal-actions"><button class="btn ghost" id="pwCancel">Cancelar</button><button class="btn primary" id="pwBtn">Cifrar y descargar</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var STORAGE_KEY = "orlando2026_plan_v2";
+  var DATA_VERSION = "base1";
+  var MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  var DIAS = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+
+  var TRIP = [];
+  for (var d = 5; d <= 13; d++){
+    var dt = new Date(2026, 8, d);
+    var key = "2026-09-" + (d < 10 ? "0"+d : ""+d);
+    TRIP.push({ key:key, date:dt, weekday:DIAS[dt.getDay()], day:d, month:MESES[dt.getMonth()] });
+  }
+
+  var state = { activities:{} };
+
+  var MODE = "setup";            // "setup" (sin proteger) | "locked" (protegido)
+  var UNLOCKED = false;
+  var sessionPassword = null;
+  var MASTER_VER = "base1";
+  var embRaw = null;
+  var SNAP_KEY = "orlando2026_snap_v3";
+
+  function cryptoOK(){ return !!(window.crypto && window.crypto.subtle && window.isSecureContext); }
+  function b64(buf){ var a=new Uint8Array(buf), s=""; for(var i=0;i<a.length;i++) s+=String.fromCharCode(a[i]); return btoa(s); }
+  function unb64(str){ var s=atob(str), a=new Uint8Array(s.length); for(var i=0;i<s.length;i++) a[i]=s.charCodeAt(i); return a; }
+  function deriveKey(password, salt, iter){
+    return crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"])
+      .then(function(km){
+        return crypto.subtle.deriveKey({name:"PBKDF2", salt:salt, iterations:iter, hash:"SHA-256"},
+          km, {name:"AES-GCM", length:256}, false, ["encrypt","decrypt"]);
+      });
+  }
+  function encryptObj(password, obj){
+    var iter=200000, salt=crypto.getRandomValues(new Uint8Array(16)), iv=crypto.getRandomValues(new Uint8Array(12));
+    return deriveKey(password, salt, iter).then(function(key){
+      return crypto.subtle.encrypt({name:"AES-GCM", iv:iv}, key, new TextEncoder().encode(JSON.stringify(obj)));
+    }).then(function(ct){
+      return {enc:true, kdf:"PBKDF2", hash:"SHA-256", iter:iter, salt:b64(salt), iv:b64(iv), ct:b64(ct)};
+    });
+  }
+  function decryptObj(password, blob){
+    return deriveKey(password, unb64(blob.salt), blob.iter||200000).then(function(key){
+      return crypto.subtle.decrypt({name:"AES-GCM", iv:unb64(blob.iv)}, key, unb64(blob.ct));
+    }).then(function(pt){
+      return JSON.parse(new TextDecoder().decode(pt));
+    });
+  }
+
+  function readEmbedded(){
+    try{ return JSON.parse(document.getElementById("tripData").textContent); }catch(e){ return null; }
+  }
+  function saveSetup(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify({version:DATA_VERSION, activities:state.activities})); }
+    catch(e){ document.getElementById("storageWarn").style.display="block"; }
+  }
+  function saveLocked(){
+    if (!sessionPassword) return;
+    encryptObj(sessionPassword, {version:DATA_VERSION, activities:state.activities}).then(function(blob){
+      blob.baseVer = MASTER_VER;
+      try{ localStorage.setItem(SNAP_KEY, JSON.stringify(blob)); }catch(e){}
+    }).catch(function(){});
+  }
+  function save(){ if (MODE==="locked") saveLocked(); else saveSetup(); }
+
+  function boot(){
+    embRaw = readEmbedded() || {};
+    if (embRaw.enc === true){
+      MODE = "locked";
+      MASTER_VER = embRaw.ver || "v0";
+      DATA_VERSION = MASTER_VER;
+      document.body.setAttribute("data-mode","lockscreen");
+      showLock();
+    } else {
+      MODE = "setup";
+      DATA_VERSION = embRaw.version || "base1";
+      state.activities = embRaw.activities || {};
+      try{
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (raw){ var o=JSON.parse(raw); if (o && o.version===DATA_VERSION && o.activities) state.activities=o.activities; }
+      }catch(e){}
+      document.body.setAttribute("data-mode","setup");
+      saveSetup();
+      render();
+    }
+  }
+
+  function esc(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+  }
+  function placeClass(place){
+    var p = (place||"").toLowerCase();
+    if (/magic kingdom|epcot|hollywood|animal kingdom|disney|typhoon|blizzard/.test(p)) return "park-disney";
+    if (/universal|islands|epic universe|volcano|citywalk/.test(p)) return "park-universal";
+    if (/miami/.test(p)) return "park-miami";
+    return "";
+  }
+
+  function render(){
+    var cont = document.getElementById("daysContainer");
+    cont.innerHTML = "";
+    var total = 0;
+    TRIP.forEach(function(t, i){
+      var list = (state.activities[t.key] || []).slice();
+      list.sort(function(a,b){ return (a.time||"99:99").localeCompare(b.time||"99:99"); });
+      total += list.length;
+
+      var card = document.createElement("section");
+      card.className = "day";
+      var itemsHtml = "";
+      if (list.length === 0){
+        itemsHtml = '<li class="empty">Sin actividades. Toca “+ Agregar aquí” para empezar.</li>';
+      } else {
+        list.forEach(function(a){
+          var placeChip = a.place ? '<span class="act-place">'+esc(a.place)+'</span>' : '';
+          var timeTxt = a.time ? esc(a.time) : "—";
+          var notes = a.notes ? '<div class="act-notes">'+esc(a.notes)+'</div>' : '';
+          itemsHtml +=
+            '<li class="act '+placeClass(a.place)+'" data-id="'+esc(a.id)+'" data-key="'+esc(t.key)+'">'+
+              '<div class="act-top">'+
+                '<span class="act-time">'+timeTxt+'</span>'+
+                '<span class="act-title">'+esc(a.title)+'</span>'+ placeChip +
+              '</div>'+ notes +
+              '<div class="act-actions">'+
+                '<button class="icon-btn edit">Editar</button>'+
+                '<button class="icon-btn del">Eliminar</button>'+
+              '</div>'+
+            '</li>';
+        });
+      }
+      card.innerHTML =
+        '<div class="day-head"><span class="day-idx">Día '+(i+1)+'</span></div>'+
+        '<div class="day-date">'+t.weekday+' '+t.day+'</div>'+
+        '<div class="day-sub">'+t.month+' de 2026</div>'+
+        '<ul class="acts">'+itemsHtml+'</ul>'+
+        '<button class="add-day" data-key="'+t.key+'">+ Agregar aquí</button>';
+      cont.appendChild(card);
+    });
+    document.getElementById("counter").textContent =
+      total === 0 ? "· sin actividades aún" : ("· "+total+(total===1?" actividad":" actividades"));
+  }
+
+  var editing = null;
+  function overlayEl(){ return document.getElementById("overlay"); }
+  function fillDaySelect(selectedKey){
+    var sel = document.getElementById("fDay");
+    sel.innerHTML = "";
+    TRIP.forEach(function(t, i){
+      var o = document.createElement("option");
+      o.value = t.key;
+      o.textContent = "Día "+(i+1)+" · "+t.weekday+" "+t.day+" sep";
+      if (t.key === selectedKey) o.selected = true;
+      sel.appendChild(o);
+    });
+  }
+  function openModal(dayKey, act){
+    editing = act ? { key:dayKey, id:act.id } : null;
+    document.getElementById("modalTitle").textContent = act ? "Editar actividad" : "Agregar actividad";
+    fillDaySelect(dayKey || TRIP[0].key);
+    document.getElementById("fTime").value  = act ? (act.time  || "") : "";
+    document.getElementById("fTitle").value = act ? (act.title || "") : "";
+    document.getElementById("fNotes").value = act ? (act.notes || "") : "";
+    document.getElementById("fPlace").value = act ? (act.place || "") : "";
+    overlayEl().classList.add("open");
+    setTimeout(function(){ document.getElementById("fTitle").focus(); }, 30);
+  }
+  function closeModal(){ overlayEl().classList.remove("open"); editing = null; }
+
+  function saveFromModal(){
+    var title = document.getElementById("fTitle").value.trim();
+    if (!title){ document.getElementById("fTitle").focus(); return; }
+    var dayKey = document.getElementById("fDay").value;
+    var data = {
+      time: document.getElementById("fTime").value,
+      title: title,
+      place: document.getElementById("fPlace").value,
+      notes: document.getElementById("fNotes").value.trim()
+    };
+    if (editing){
+      var arr = state.activities[editing.key] || [];
+      var idx = -1;
+      for (var k=0;k<arr.length;k++){ if (arr[k].id === editing.id){ idx = k; break; } }
+      var id = editing.id;
+      if (idx > -1) arr.splice(idx,1);
+      if (!state.activities[dayKey]) state.activities[dayKey] = [];
+      state.activities[dayKey].push(Object.assign({id:id}, data));
+    } else {
+      if (!state.activities[dayKey]) state.activities[dayKey] = [];
+      state.activities[dayKey].push(Object.assign({id:"a"+Date.now()+Math.floor(Math.random()*1000)}, data));
+    }
+    save(); render(); closeModal();
+  }
+  function findAct(key, id){
+    var arr = state.activities[key] || [];
+    for (var i=0;i<arr.length;i++){ if (arr[i].id === id) return arr[i]; }
+    return null;
+  }
+  function deleteAct(key, id){
+    var arr = state.activities[key] || [];
+    for (var i=0;i<arr.length;i++){ if (arr[i].id === id){ arr.splice(i,1); break; } }
+    save(); render();
+  }
+
+  document.getElementById("daysContainer").addEventListener("click", function(e){
+    var addBtn = e.target.closest(".add-day");
+    if (addBtn){ openModal(addBtn.getAttribute("data-key"), null); return; }
+    var li = e.target.closest(".act");
+    if (!li) return;
+    var key = li.getAttribute("data-key");
+    var id = li.getAttribute("data-id");
+    if (e.target.classList.contains("edit")){ var a = findAct(key, id); if (a) openModal(key, a); }
+    else if (e.target.classList.contains("del")){ if (confirm("¿Eliminar esta actividad?")) deleteAct(key, id); }
+  });
+
+  document.getElementById("btnAdd").addEventListener("click", function(){ openModal(TRIP[0].key, null); });
+  document.getElementById("btnSave").addEventListener("click", saveFromModal);
+  document.getElementById("btnCancel").addEventListener("click", closeModal);
+  overlayEl().addEventListener("click", function(e){ if (e.target === overlayEl()) closeModal(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && overlayEl().classList.contains("open")) closeModal(); });
+  document.getElementById("fTitle").addEventListener("keydown", function(e){ if (e.key === "Enter"){ e.preventDefault(); saveFromModal(); } });
+  document.getElementById("btnPrint").addEventListener("click", function(){ window.print(); });
+  document.getElementById("btnReset").addEventListener("click", function(){
+    if (confirm("Esto borra todas las actividades del plan. ¿Continuar?")){ state.activities = {}; save(); render(); }
+  });
+
+  document.getElementById("btnExport").addEventListener("click", function(){
+    var blob = new Blob([JSON.stringify(state.activities, null, 2)], {type:"application/json"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = "plan_orlando_2026.json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 500);
+  });
+  document.getElementById("btnImport").addEventListener("click", function(){ document.getElementById("fileInput").click(); });
+  document.getElementById("fileInput").addEventListener("change", function(e){
+    var file = e.target.files[0]; if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      try{
+        var data = JSON.parse(ev.target.result);
+        if (data && typeof data === "object"){
+          if (confirm("¿Reemplazar el plan actual con el archivo importado?")){ state.activities = data; save(); render(); }
+        } else { alert("El archivo no tiene el formato esperado."); }
+      }catch(err){ alert("No se pudo leer el archivo: no es un JSON válido."); }
+      e.target.value = "";
+    };
+    reader.readAsText(file);
+  });
+
+  // Descarga una copia del propio .html con el plan actual incrustado (portable para compartir).
+  function buildFile(embeddedObj, keepStatic){
+    var skyDeco=document.getElementById("skyDeco");
+    var days=document.getElementById("daysContainer");
+    var warn=document.getElementById("storageWarn");
+    var dataEl=document.getElementById("tripData");
+    var root=document.documentElement;
+
+    var savedStars=skyDeco.innerHTML, savedDays=days.innerHTML, savedWarn=warn.style.display,
+        savedClass=root.className, savedData=dataEl.textContent, savedMode=document.body.getAttribute("data-mode");
+
+    root.className="nojs";
+    skyDeco.innerHTML="";
+    if (!keepStatic) days.innerHTML="";          // archivo cifrado: NO deja texto en claro
+    overlayEl().classList.remove("open");
+    document.getElementById("fileInput").value="";
+    warn.style.display="none";
+    document.body.removeAttribute("data-mode");   // el archivo publicado decide su modo al abrir
+    dataEl.textContent="\n"+JSON.stringify(embeddedObj).replace(/</g,"\\u003c")+"\n";
+
+    var out="<!DOCTYPE html>\n"+root.outerHTML;
+
+    root.className=savedClass;
+    skyDeco.innerHTML=savedStars;
+    if (!keepStatic) days.innerHTML=savedDays;
+    warn.style.display=savedWarn;
+    dataEl.textContent=savedData;
+    if (savedMode) document.body.setAttribute("data-mode", savedMode);
+    return out;
+  }
+  function downloadHtml(text, filename){
+    var blob=new Blob([text],{type:"text/html"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");
+    a.href=url; a.download=filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 600);
+  }
+  function exportEncrypted(password){
+    if (!cryptoOK()){ alert("El cifrado necesita abrir el plan por https (tu enlace de GitHub) o en Chrome de escritorio."); return; }
+    var newVer="v"+Date.now();
+    encryptObj(password, {version:newVer, activities:state.activities}).then(function(blob){
+      blob.ver=newVer;                              // etiqueta pública (no secreta) de versión
+      var out=buildFile(blob, false);               // sin tarjetas en claro
+      MODE="locked"; UNLOCKED=true; sessionPassword=password; MASTER_VER=newVer; DATA_VERSION=newVer;
+      document.body.setAttribute("data-mode","unlocked");
+      saveLocked();
+      downloadHtml(out, "index.html");
+    }).catch(function(){ alert("No se pudo cifrar. Abre el plan por https o en Chrome de escritorio."); });
+  }
+
+  function showLock(){
+    if (!cryptoOK()){
+      var lm=document.getElementById("lockMsg");
+      lm.className="pw-msg err";
+      lm.textContent="Para descifrar, abre el plan por https (tu enlace) o en Chrome de escritorio.";
+    }
+    document.getElementById("lockOverlay").classList.add("open");
+    setTimeout(function(){ document.getElementById("lockPw").focus(); }, 60);
+  }
+  function doUnlock(){
+    var pw=document.getElementById("lockPw").value;
+    var msg=document.getElementById("lockMsg");
+    if (!pw){ document.getElementById("lockPw").focus(); return; }
+    if (!cryptoOK()) return;
+    msg.className="pw-msg"; msg.textContent="Descifrando…";
+    decryptObj(pw, embRaw).then(function(obj){
+      DATA_VERSION = obj.version || MASTER_VER;
+      sessionPassword = pw; UNLOCKED = true;
+      var finish=function(activities){
+        state.activities = activities || {};
+        document.body.setAttribute("data-mode","unlocked");
+        document.getElementById("lockOverlay").classList.remove("open");
+        document.getElementById("lockPw").value="";
+        render(); saveLocked();
+      };
+      var snapRaw=null; try{ snapRaw=localStorage.getItem(SNAP_KEY); }catch(e){}
+      if (snapRaw){
+        try{
+          var snap=JSON.parse(snapRaw);
+          if (snap && snap.baseVer===MASTER_VER){
+            return decryptObj(pw, snap).then(function(s){ finish(s.activities||obj.activities); })
+                                       .catch(function(){ finish(obj.activities); });
+          }
+        }catch(e){}
+      }
+      finish(obj.activities);
+    }).catch(function(){
+      msg.className="pw-msg err"; msg.textContent="Contraseña incorrecta. Intenta de nuevo.";
+    });
+  }
+  function openPwDialog(){
+    document.getElementById("pw1").value=""; document.getElementById("pw2").value="";
+    var m=document.getElementById("pwMsg"); m.className="pw-msg"; m.textContent="";
+    document.getElementById("pwOverlay").classList.add("open");
+    setTimeout(function(){ document.getElementById("pw1").focus(); }, 60);
+  }
+
+  document.getElementById("btnDownload").addEventListener("click", function(){
+    if (MODE==="locked" && UNLOCKED && sessionPassword){ exportEncrypted(sessionPassword); }
+    else { openPwDialog(); }
+  });
+  document.getElementById("pwCancel").addEventListener("click", function(){ document.getElementById("pwOverlay").classList.remove("open"); });
+  document.getElementById("pwBtn").addEventListener("click", function(){
+    var a=document.getElementById("pw1").value, b=document.getElementById("pw2").value, m=document.getElementById("pwMsg");
+    if (a.length<4){ m.className="pw-msg err"; m.textContent="Usa al menos 4 caracteres."; return; }
+    if (a!==b){ m.className="pw-msg err"; m.textContent="Las contraseñas no coinciden."; return; }
+    document.getElementById("pwOverlay").classList.remove("open");
+    exportEncrypted(a);
+  });
+  document.getElementById("lockBtn").addEventListener("click", doUnlock);
+  document.getElementById("lockPw").addEventListener("keydown", function(e){ if(e.key==="Enter"){ e.preventDefault(); doUnlock(); } });
+
+  (function stars(){
+    var host = document.getElementById("skyDeco");
+    for (var i=0;i<46;i++){
+      var s = document.createElement("div");
+      s.className = "star";
+      var sz = (Math.random()*2+1).toFixed(1);
+      s.style.width = sz+"px"; s.style.height = sz+"px";
+      s.style.left = (Math.random()*100).toFixed(2)+"%";
+      s.style.top = (Math.random()*55).toFixed(2)+"%";
+      s.style.animationDelay = (Math.random()*4).toFixed(2)+"s";
+      host.appendChild(s);
+    }
+  })();
+
+  boot();
+})();
+</script>
+
+
+</body></html>
